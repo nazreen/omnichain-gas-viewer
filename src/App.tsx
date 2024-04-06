@@ -18,16 +18,16 @@ type SupportedChains = string[]
 function App() {
   const [balances, setBalances] = useState<Balances>();
   const [address, setAddress] = useState('');
-  const [supportedChains, setSupportedChains] = useState([]);
+  const [supportedChains, setSupportedChains] = useState<SupportedChains>([]);
   const [componentState, setComponentState] = useState<COMPONENT_STATES>(COMPONENT_STATES.INITIAL);
 
   useEffect(() => {
     axios.get('/chains').then((res) => setSupportedChains(res.data));
   }, []);
 
-  async function getBalances() {
+  async function getBalances(address: string) {
     setComponentState(COMPONENT_STATES.LOADING);
-    const res = await axios.get('api');
+    const res = await axios.get(`api/${address}`);
     setBalances(res.data);
     setComponentState(COMPONENT_STATES.LOADED);
   }
@@ -45,7 +45,7 @@ function App() {
 
   return (
     <div className='flex flex-col items-center p-10'>
-      <h1 className="text-3xl font-bold underline mb-6">Omnichain Testnset Gas Viewer</h1>
+      <h1 className="text-3xl font-bold underline mb-6">Omnichain Testnet Gas Viewer</h1>
       <section>
         <p className='mb-6'>Enter an address below to see its balances across multiple testnets.</p>
         {/* <label htmlFor="address">Address: </label> */}
@@ -58,9 +58,9 @@ function App() {
             placeholder="Enter address"
             className='border border-black p-2 m-2 mb-6 w-[500px]'
             maxLength={42}
-            onKeyDown={(e) => e.key === 'Enter' && getBalances()}
+            onKeyDown={(e) => e.key === 'Enter' && getBalances(address)}
           />
-          <button className='border border-black p-2 m-2 h-10 w-[150px]' onClick={getBalances}>Get Balances</button>
+          <button className='border border-black p-2 m-2 h-10 w-[150px]' onClick={() => getBalances(address)}>Get Balances</button>
         </div>
       </section>
       <section className='max-w-3xl'>

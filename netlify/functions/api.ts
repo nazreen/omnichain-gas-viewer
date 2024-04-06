@@ -6,6 +6,7 @@ type AlchemyClients = {
 };
 
 const API_KEY = process.env.API_KEY;
+if (!API_KEY) throw new Error("Missing API key");
 
 const alchemyClients: Partial<AlchemyClients> = {
 
@@ -22,10 +23,7 @@ interface Balances {
 }
 
 
-const address = "0x3a92924f2c8aAA64E7AEF846f73C0463A2f54173";
-
-
-async function getBalances(): Promise<Balances> {
+async function getBalances(address: string): Promise<Balances> {
     const networks = Object.keys(alchemyClients) as Array<keyof typeof alchemyClients>;
 
     // Map each network to a promise that fetches the balance
@@ -57,10 +55,10 @@ async function getBalances(): Promise<Balances> {
 }
 
 export default async (req: Request, context: Context) => {
-    const balances = await getBalances(); // Use the caching version
+    const balances = await getBalances(context.params.address); // Use the caching version
     return new Response(JSON.stringify(balances));
 }
 
 export const config: Config = {
-    path: "/api"
+    path: "/api/:address"
 };
