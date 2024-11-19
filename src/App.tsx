@@ -76,7 +76,24 @@ function App() {
         </div>
         <div hidden={[COMPONENT_STATES.INITIAL, COMPONENT_STATES.LOADING].includes(componentState)}>
           <h2 className='text-2xl font-bold text-center'>Balances</h2>
-          <pre>{JSON.stringify(parsedBalances, null, 2)}</pre>
+          <div className='overflow-x-auto'>
+            <table className='min-w-full border-collapse border border-gray-300'>
+              <thead>
+                <tr>
+                  <th className='border border-gray-300 p-2'>Network</th>
+                  <th className='border border-gray-300 p-2'>Balance</th>
+                </tr>
+              </thead>
+              <tbody>
+                {parsedBalances && Object.keys(parsedBalances).map((key) => (
+                  <tr key={key}>
+                    <td className='border border-gray-300 p-2'>{key}</td>
+                    <td className='border border-gray-300 p-2'>{parsedBalances[key].balance}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
       <section className='text-center'>
