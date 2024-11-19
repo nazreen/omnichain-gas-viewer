@@ -67,9 +67,16 @@ function App() {
           <button className='border border-black p-2 m-2 h-10 w-[150px]' onClick={() => getBalances(address)}>Get Balances</button>
         </div>
       </section>
-      <section className='max-w-3xl'>
-        You can view balances on the following testnets: {supportedChains.length > 0 ? supportedChains.map(chain => <span key={chain} className='mx-1'>{chain}</span>) : '(Loading...)'}
-      </section>
+      <div className='text-center my-4'>
+        <h3 className='text-xl font-semibold'>You can view balances on the following testnets:</h3>
+        <div className='flex flex-wrap justify-center mt-2'>
+          {supportedChains.map((chain) => (
+            <span key={chain} className='bg-blue-200 text-blue-800 text-sm font-semibold mr-2 mb-2 px-3 py-1 rounded-full'>
+              {chain}
+            </span>
+          ))}
+        </div>
+      </div>
       <section className='my-6'>
         <div hidden={componentState != COMPONENT_STATES.LOADING}>
           Loading...
