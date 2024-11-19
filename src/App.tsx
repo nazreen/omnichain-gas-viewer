@@ -9,7 +9,10 @@ enum COMPONENT_STATES {
 }
 
 interface Balances {
-  [network: string]: string;
+  [network: string]: {
+    balance: string;
+    error?: boolean;
+  };
 }
 
 type SupportedChains = string[]
@@ -35,8 +38,10 @@ function App() {
   const parsedBalances = useMemo(() => {
     if (!balances) return;
     const parsedBalances: Balances = {};
+
     Object.keys(balances).forEach((key) => {
-      parsedBalances[key] = formatEther(BigInt(balances[key]));
+      console.log({ balances, key });
+      parsedBalances[key] = { balance: formatEther(BigInt(balances[key].balance)) };
     });
     return parsedBalances;
   },

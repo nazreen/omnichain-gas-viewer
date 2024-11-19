@@ -38,7 +38,7 @@ async function getBalances(address: string): Promise<Balances> {
             return { network, balance: formattedBalance };
         } catch (error) {
             console.error(`Failed to get balance for network ${network}:`, error.message);
-            return { network, balance: '0' }; // Placeholder for error
+            return { network, error: true, balance: '0' }; // Placeholder for error
         }
     });
 
@@ -46,8 +46,8 @@ async function getBalances(address: string): Promise<Balances> {
     const results = await Promise.all(balancePromises);
 
     // Convert array of results back into an object
-    const balances: Balances = results.reduce((acc, { network, balance }) => {
-        acc[network] = balance;
+    const balances: Balances = results.reduce((acc, { network, balance, error }) => {
+        acc[network] = { balance, error };
         return acc;
     }, {});
 
