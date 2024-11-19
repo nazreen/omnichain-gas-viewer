@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "alchemy-sdk": "^3.2.1"
+    "alchemy-sdk": "^3.5.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.5"

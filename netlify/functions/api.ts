@@ -13,7 +13,7 @@ const alchemyClients: Partial<AlchemyClients> = {
     [Network.ETH_SEPOLIA]: new Alchemy({ apiKey: API_KEY, network: Network.ETH_SEPOLIA }),
     [Network.OPT_SEPOLIA]: new Alchemy({ apiKey: API_KEY, network: Network.OPT_SEPOLIA }),
     [Network.BASE_SEPOLIA]: new Alchemy({ apiKey: API_KEY, network: Network.BASE_SEPOLIA }),
-    [Network.MATIC_MUMBAI]: new Alchemy({ apiKey: API_KEY, network: Network.MATIC_MUMBAI }),
+    [Network.MATIC_AMOY]: new Alchemy({ apiKey: API_KEY, network: Network.MATIC_AMOY }),
 } as const;
 
 export const supportedChains = Object.keys(alchemyClients);
