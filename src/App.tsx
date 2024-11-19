@@ -40,8 +40,7 @@ function App() {
     const parsedBalances: Balances = {};
 
     Object.keys(balances).forEach((key) => {
-      console.log({ balances, key });
-      parsedBalances[key] = { balance: formatEther(BigInt(balances[key].balance)) };
+      parsedBalances[key] = { ...balances[key], balance: formatEther(BigInt(balances[key].balance)) };
     });
     return parsedBalances;
   },
