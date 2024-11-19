@@ -37,8 +37,8 @@ async function getBalances(address: string): Promise<Balances> {
             const formattedBalance = rawBalance.toString(); // Formatting balance
             return { network, balance: formattedBalance };
         } catch (error) {
-            console.error(`Failed to get balance for network ${network}:`, error);
-            return { network, balance: 'Error fetching balance' }; // Placeholder for error
+            console.error(`Failed to get balance for network ${network}:`, error.message);
+            return { network, balance: '0' }; // Placeholder for error
         }
     });
 

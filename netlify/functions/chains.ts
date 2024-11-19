@@ -1,7 +1,8 @@
 import type { Context, Config } from "@netlify/functions"
 import { supportedChains } from "./api";
 
-export default async (req: Request, context: Context) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default async (_req: Request, _context: Context) => {
     return new Response(JSON.stringify(supportedChains))
 }
 
