@@ -19,8 +19,8 @@ type SupportedChains = string[]
 
 
 function App() {
-  const [balances, setBalances] = useState<Balances>();
-  const [address, setAddress] = useState('');
+  const [balances, setBalances] = useState<Balances | undefined>(undefined);
+  const [address, setAddress] = useState<string>('');
   const [supportedChains, setSupportedChains] = useState<SupportedChains>([]);
   const [componentState, setComponentState] = useState<COMPONENT_STATES>(COMPONENT_STATES.INITIAL);
 
@@ -28,14 +28,14 @@ function App() {
     axios.get('/chains').then((res) => setSupportedChains(res.data));
   }, []);
 
-  async function getBalances(address: string) {
+  async function getBalances(address: string): Promise<void> {
     setComponentState(COMPONENT_STATES.LOADING);
     const res = await axios.get(`api/${address}`);
     setBalances(res.data);
     setComponentState(COMPONENT_STATES.LOADED);
   }
 
-  const parsedBalances = useMemo(() => {
+  const parsedBalances = useMemo<Balances | undefined>(() => {
     if (!balances) return;
     const parsedBalances: Balances = {};
 
