@@ -90,7 +90,7 @@ function App() {
         </div>
       </div>
       <section className='my-6'>
-        <div hidden={componentState != COMPONENT_STATES.LOADING}>
+        <div hidden={componentState != COMPONENT_STATES.LOADING} className="text-2xl font-bold text-center my-4">
           Loading...
         </div>
         <div hidden={[COMPONENT_STATES.INITIAL, COMPONENT_STATES.LOADING].includes(componentState)}>
