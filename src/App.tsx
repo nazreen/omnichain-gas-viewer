@@ -28,6 +28,17 @@ function App() {
     axios.get('/chains').then((res) => setSupportedChains(res.data));
   }, []);
 
+  useEffect(() => {
+    const savedAddress = localStorage.getItem('address');
+    if (savedAddress) {
+      setAddress(savedAddress);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('address', address);
+  }, [address]);
+
   async function getBalances(address: string): Promise<void> {
     setComponentState(COMPONENT_STATES.LOADING);
     const res = await axios.get(`api/${address}`);
