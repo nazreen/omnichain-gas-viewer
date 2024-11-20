@@ -14,6 +14,7 @@ const alchemyClients: Partial<AlchemyClients> = {
     [Network.OPT_SEPOLIA]: new Alchemy({ apiKey: API_KEY, network: Network.OPT_SEPOLIA }),
     [Network.BASE_SEPOLIA]: new Alchemy({ apiKey: API_KEY, network: Network.BASE_SEPOLIA }),
     [Network.MATIC_AMOY]: new Alchemy({ apiKey: API_KEY, network: Network.MATIC_AMOY }),
+    [Network.AVAX_FUJI]: new Alchemy({ apiKey: API_KEY, network: Network.AVAX_FUJI }),
 } as const;
 
 export const supportedChains = Object.keys(alchemyClients);
