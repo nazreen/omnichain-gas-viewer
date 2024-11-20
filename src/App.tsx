@@ -32,6 +32,7 @@ function App() {
     const savedAddress = localStorage.getItem('address');
     if (savedAddress) {
       setAddress(savedAddress);
+      getBalances(savedAddress);
     }
   }, []);
 
